@@ -2,8 +2,11 @@ from datetime import date, datetime
 from typing import Optional, Union
 import sqlite3
 from langchain_core.tools import tool
+from dotenv import load_dotenv
 
-db = "database\travel2.backup.sqlite"
+load_dotenv()
+
+db = "travel2.sqlite" 
 
 @tool
 def search_car_rentals(
