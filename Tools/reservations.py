@@ -1,8 +1,11 @@
 import sqlite3
 from langchain_core.tools import tool
 from typing import Optional
+from dotenv import load_dotenv
 
-db = "database\travel2.backup.sqlite"
+load_dotenv()
+
+db = "travel2.sqlite" 
 
 
 @tool
@@ -130,4 +133,4 @@ def cancel_excursion(recommendation_id: int) -> str:
         return f"Trip recommendation {recommendation_id} successfully cancelled."
     else:
         conn.close()
-        return f"No trip recommendation found with ID {recommendation_id}."
+    return f"No trip recommendation found with ID {recommendation_id}."
