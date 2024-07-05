@@ -1,12 +1,14 @@
 import sqlite3
 from datetime import date, datetime
 from typing import Optional
-
+from dotenv import load_dotenv
 import pytz
 from langchain_core.runnables import ensure_config
 from langchain_core.tools import tool
 
-db = "database\travel2.backup.sqlite"
+load_dotenv()
+
+db = "travel2.sqlite" 
 
 @tool
 def fetch_user_flight_information() -> list[dict]:
