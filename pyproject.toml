@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "customer-support-bot"
+version = "0.1.0"
+description = ""
+authors = ["Andreu Llopis <andreulll9@gamil.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langgraph = "^0.1.5"
+langchain-community = "^0.2.6"
+langchain-anthropic = "^0.1.19"
+tavily-python = "^0.3.3"
+pandas = "^2.2.2"
+openai = "^1.35.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
