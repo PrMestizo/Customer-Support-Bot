@@ -20,9 +20,6 @@ class Assistant:
 
     def __call__(self, state: State, config: RunnableConfig):
         while True:
-            configuration = config.get("configurable", {})
-            passenger_id = configuration.get("passenger_id", None)
-            state = {**state, "user_info": passenger_id}
             result = self.runnable.invoke(state)
             # If the LLM happens to return an empty response, we will re-prompt it
             # for an actual response.
@@ -41,13 +38,12 @@ class Assistant:
 # Haiku is faster and cheaper, but less accurate
 # llm = ChatAnthropic(model="claude-3-haiku-20240307")
 #llm = ChatAnthropic(model="claude-3-sonnet-20240229", temperature=1)
-# You could swap LLMs, though you will likely want to update the prompts when
-# doing so!
-
+# You could also use OpenAI or another model, though you will likely have
+# to adapt the prompts
 
 llm = ChatOpenAI(model="gpt-4-turbo-preview")
 
-primary_assistant_prompt = ChatPromptTemplate.from_messages(
+assistant_prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
@@ -62,7 +58,7 @@ primary_assistant_prompt = ChatPromptTemplate.from_messages(
     ]
 ).partial(time=datetime.now())
 
-part_1_tools = [
+part_2_tools = [
     TavilySearchResults(max_results=1),
     fetch_user_flight_information,
     search_flights,
@@ -82,4 +78,4 @@ part_1_tools = [
     update_excursion,
     cancel_excursion,
 ]
-part_1_assistant_runnable = primary_assistant_prompt | llm.bind_tools(part_1_tools)
+part_2_assistant_runnable = assistant_prompt | llm.bind_tools(part_2_tools)
