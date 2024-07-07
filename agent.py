@@ -30,6 +30,8 @@ class Assistant:
             ):
                 messages = state["messages"] + [("user", "Respond with a real output.")]
                 state = {**state, "messages": messages}
+                messages = state["messages"] + [("user", "Respond with a real output.")]
+                state = {**state, "messages": messages}
             else:
                 break
         return {"messages": result}
@@ -58,24 +60,34 @@ assistant_prompt = ChatPromptTemplate.from_messages(
     ]
 ).partial(time=datetime.now())
 
-part_2_tools = [
+# "Read"-only tools (such as retrievers) don't need a user confirmation to use
+part_3_safe_tools = [
     TavilySearchResults(max_results=1),
     fetch_user_flight_information,
     search_flights,
     lookup_policy,
+    search_car_rentals,
+    search_hotels,
+    search_trip_recommendations,
+]
+
+# These tools all change the user's reservations.
+# The user has the right to control what decisions are made
+part_3_sensitive_tools = [
     update_ticket_to_new_flight,
     cancel_ticket,
-    search_car_rentals,
     book_car_rental,
     update_car_rental,
     cancel_car_rental,
-    search_hotels,
     book_hotel,
     update_hotel,
     cancel_hotel,
-    search_trip_recommendations,
     book_excursion,
     update_excursion,
     cancel_excursion,
 ]
-part_2_assistant_runnable = assistant_prompt | llm.bind_tools(part_2_tools)
+sensitive_tool_names = {t.name for t in part_3_sensitive_tools}
+# Our LLM doesn't have to know which nodes it has to route to. In its 'mind', it's just invoking functions.
+part_3_assistant_runnable = assistant_prompt | llm.bind_tools(
+    part_3_safe_tools + part_3_sensitive_tools
+)
