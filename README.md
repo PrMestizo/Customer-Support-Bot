@@ -40,3 +40,15 @@ Activate the virtual environment
 ```
 poetry shell
 ```
+
+Run database.py to get the sql files
+```
+python database.py
+```
+
+Last one! Run graph.py and see the power os the bot.
+```
+python graph.py
+```
+
+**Frontend on process** Let me cook.
