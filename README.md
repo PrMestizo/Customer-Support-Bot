@@ -1,9 +1,11 @@
-# Customer-Support-Bot
+# Customer-Support-Bot with LangGraph 🧠
 Building a Customer Support Chatbot with LangGraph.
 
 This is an adaptation of the customer support bot of the LangGraph docs. So props to them. Here is the [link](https://langchain-ai.github.io/langgraph/tutorials/customer-support/customer-support) where is all explained.
 
-This project demonstrates how to build an airline customer support bot using LangGraph, an AI conversational platform. The bot can assist users in researching and making travel arrangements, including flights, hotels, car rentals, and excursions.
+✈️ This project demonstrates how to build an airline customer support bot using LangGraph, an AI conversational platform. The bot can assist users in researching and making travel arrangements, including flights, hotels, car rentals, and excursions.
+
+👀 **Browse through the 4 branches to find the bot that best suits your needs. This is the most complex one. However, more complexity doesn't always mean better.**
 
 ![Descripción de la imagen](assets/Specialized-Workflows.png)
 
